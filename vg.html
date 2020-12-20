@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>MyTube Player - Playlists</title>
+        <link  href="C:\Users\maste\MyTube Player\index.css" rel = "stylesheet">
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    </head>
+    <header> 
+        <a class="logo" href="index.html"><img src="LOGO2.png" alt="Library"></a>
+        <a class="plogo"><img class="plogo2" src="vg.jpg"></a>
+    </header>
+    <body>
+        
+        <h1 class="page5"><font size=6>Videogame Soundtracks</font></h1>
+       
+        <body class="body2">
+            <nav class="nav2">
+                <a href=https://www.youtube.com/ class="nav2_link">
+                    <i class="material-icons nav2_icon">search</i>
+                    <span class="nav2_text">Search</span>
+                </a>
+                <a href="index.html" class="nav2_link">
+                    <i class="material-icons nav2_icon">library_music</i>
+                    <span class="nav2_text">Library</span>
+                </a>
+                <a href="Media.html" class="nav2_link">
+                    <i class="material-icons nav2_icon">play_circle_outline</i>
+                    <span class="nav2_text">Media</span>
+                    <a class="nav2_link" href="Information.html">
+                        <i class="material-icons">help</i>
+                        Help</a>
+                </a>
+            </nav>
+            <body class="music">
+                <audio src="" controls id="audioPlayer">
+                    Looks like your browser doesn't support HTML5. Unfortunate!
+                </audio>
+        <ul id="playlist">
+            <div class="end2"></div>
+            <li><a href="Last Surprise.mp3"><img class="source3" src="pg.jpg">  Last Surprise - Persona 5</a></li>
+            <div class="end3"></div>
+            <li><a href="Vampire Killer.mp3"><img class="source3" src="smash.jpg">  Vampire Killer (Remix) - Super Smash Brothers Ultimate</a></li>
+            <div class="end3"></div>
+            <div class="end"></div>
+        </ul>
+        <script src="https://code.jquery.com/jquery-2.2.0.js"></script>
+        <script>
+            audioPlayer();
+            function audioPlayer(){
+                var currentSong = 0;
+                $("#audioPlayer")[0].src = $("#playlist li a")[0];
+                $("#playlist li a").click(function(e){
+                    e.preventDefault();
+                    $("#audioPlayer")[0].src = this;
+                    $("#audioPlayer")[0].play();
+                    $("#playlist li").removeClass("current-song");
+                    currentSong = $(this).parent().index();
+                    $(this).parent().addClass("current-song");
+                });
+
+                $("#audioPlayer")[0].addEventListener("ended", function(){
+                    currentSong++;
+                    if(currentSong == $("#playlist li a").length)
+                        currentSong = 0;
+                    $("#playlist li").removeClass("current-song");
+                    $("#playlist li:eq("+currentSong+")").addClass("current-song");
+                    $("#audioPlayer")[0].src = $("#playlist li a")[currentSong].href;
+                    $("#audioPlayer")[0].play();
+                })
+            }
+        </script>
+        </body>
+    </body>
+</html>
